@@ -21,8 +21,8 @@ start_service() {
 	[ "$enabled" -eq "1" ] || return 1
 
 	if [ "$auto_activate" -eq "1" ];then
-		hostname=$(uci get system.@system[0].hostname)
-		echo "srv-host=_vlmcs._tcp,$hostname,1688,0,100" > $DNSMASQ_VLMCSD
+		hostname="$(uci get system.@system[0].hostname)"
+		echo "srv-host=_vlmcs._tcp,$hostname,1688,0,100" > "$DNSMASQ_VLMCSD"
 		/etc/init.d/dnsmasq restart 2>"/dev/null"
 	fi
 
