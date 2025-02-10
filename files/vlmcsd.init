@@ -3,9 +3,9 @@
 START=99
 USE_PROCD=1
 
-DNSMASQ_UCI_CONFIG="$(uci -q show "dhcp.@dnsmasq[0]" | awk 'NR==1 {split($0, conf, /[.=]/); print conf[2]}')"
-if [ -f "/tmp/etc/dnsmasq.conf.$DNSMASQ_UCI_CONFIG" ];then
-	DNSMASQ_VLMCSD="$(awk -F '=' '/^conf-dir=/ {print $2}' "/tmp/etc/dnsmasq.conf.$DNSMASQ_UCI_CONFIG")/dnsmasq-vlmcsd.conf"
+dnsmasq_uci_config="$(uci -q show "dhcp.@dnsmasq[0]" | awk 'NR==1 {split($0, conf, /[.=]/); print conf[2]}')"
+if [ -f "/tmp/etc/dnsmasq.conf.$dnsmasq_uci_config" ];then
+	DNSMASQ_VLMCSD="$(awk -F '=' '/^conf-dir=/ {print $2}' "/tmp/etc/dnsmasq.conf.$dnsmasq_uci_config")/dnsmasq-vlmcsd.conf"
 else
 	DNSMASQ_VLMCSD="/tmp/dnsmasq.d/dnsmasq-vlmcsd.conf"
 fi
@@ -70,13 +70,13 @@ stop_service() {
 	/etc/init.d/dnsmasq restart 2>"/dev/null"
 }
 
+service_stopped() {
+	procd_set_config_changed firewall
+}
+
 reload_service() {
 	stop
 	start
-}
-
-service_stopped() {
-	procd_set_config_changed firewall
 }
 
 service_triggers() {
