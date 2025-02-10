@@ -70,6 +70,11 @@ stop_service() {
 	/etc/init.d/dnsmasq restart 2>"/dev/null"
 }
 
+reload_service() {
+	stop
+	start
+}
+
 service_stopped() {
 	procd_set_config_changed firewall
 }
