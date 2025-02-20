@@ -27,7 +27,6 @@ define Package/vlmcsd
   TITLE:=A KMS Emulator in C
   URL:=https://github.com/Wind4/vlmcsd
   DEPENDS:=+libpthread
-  USERID:=vlmcsd:vlmcsd
 endef
 
 define Package/vlmcsd/description
