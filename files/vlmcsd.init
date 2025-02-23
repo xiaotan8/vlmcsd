@@ -37,6 +37,8 @@ start_service() {
 	procd_set_param file "/etc/vlmcsd.ini"
 	procd_set_param respawn
 
+	procd_set_param user vlmcsd
+	procd_set_param group vlmcsd
 	procd_add_jail vlmcsd ronly log
 	procd_add_jail_mount "/etc/vlmcsd.ini"
 
