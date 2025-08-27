@@ -5,7 +5,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vlmcsd
-PKG_RELEASE:=5
+PKG_VERSION:=svn1113
+PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/Wind4/vlmcsd.git
@@ -27,7 +28,6 @@ define Package/vlmcsd
   TITLE:=A KMS Emulator in C
   URL:=https://github.com/Wind4/vlmcsd
   DEPENDS:=+libpthread
-  USERID:=vlmcsd:vlmcsd
 endef
 
 define Package/vlmcsd/description
@@ -46,8 +46,10 @@ define Package/vlmcsd/install
 
 	$(INSTALL_DIR) $(1)/etc
 	$(INSTALL_BIN) ./files/vlmcsd.ini $(1)/etc/vlmcsd.ini
+
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_BIN) ./files/vlmcsd.conf $(1)/etc/config/vlmcsd
+
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/vlmcsd.init $(1)/etc/init.d/vlmcsd
 endef
